@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 최고점수 학생 찾기</title>
+</head>
+<body>
+    <script>
+        let student = [
+            {name:"엘사", score:85},
+            {name:"모아나", score:92},
+            {name:"주디", score:78},
+            {name:"라푼젤", score:36},
+        ]
+
+        console.log(student);
+
+        document.write("모든 학생 평균 <br>");
+
+        let totalScore = 0;
+        for(let i = 0; i < student.length;i++){
+            // console.log(student[i].score);
+            totalScore += student[i].score;
+        }
+        console.log(totalScore);
+
+        let avgScore = totalScore/student.length;
+        console.log(avgScore);
+
+        let roundScore = Math.round(avgScore);
+        console.log(roundScore);
+
+        document.write(`평균 : ${roundScore}`);
+
+        // 최고점수학생이름찾기 숙제 (풀어보셔용~~)
+    </script>
+</body>
+</html>

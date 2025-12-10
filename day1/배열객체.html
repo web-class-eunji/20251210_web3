@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열객체</title>
+</head>
+<body>
+    <script>
+        let arrData = new Array();
+        arrData[0] = "안녕하세요 오늘은 배열객체를 배워볼게요";
+        arrData[1] = 8;
+        arrData[2] = "8이 뭐냐구요? 제가 좋아하는 숫자입니당";
+
+        document.write(arrData);
+
+        document.write("<br>");
+
+        let arrData2 = new Array("오늘의 날씨는","매우 추워요","오들오들");
+        document.write(arrData2);
+
+        let arrData3 = ["자바스크립트","재미있나요?","백점만점에",80,"점"];
+        document.write(arrData3);
+
+        let a = [1,2,3];
+        console.log(a[0]);
+        console.log(a[1]);
+        console.log(a[2]);
+
+        console.log(a.length);
+
+        for(let i = 0; i < a.length; i++){
+            console.log(a[i]);
+        }
+    </script>
+</body>
+</html>
