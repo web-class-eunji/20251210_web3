@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>브라우저객체</title>
+</head>
+<body>
+    <script>
+        /*
+        open("url","새창 이름","새창 옵션")
+        alert : 경고 알림창
+        prompt("질문","답변가이드")
+        confirm("질문내용") : 확인True / 취소False 버튼을 누를 수 있음
+        setTimeout(function(){
+            자바스크립트 코드;
+        },일정시간) : 단 한번 일정한 시간 간격으로 코드를 실행
+        setInterval : 일정 시간 간격으로 코드를 계속 실행
+        */
+
+        // window.open("https://www.youtube.com/","유튜브","width=350, height=400, left=50,top=500");
+
+        let userConfirm = confirm("탈퇴완료되었습니다.");
+        console.log(userConfirm);
+
+        let num = 0;
+        let numadd = setInterval(()=>{
+            num++;
+            console.log("num : ",num);
+        },5000);
+    </script>
+</body>
+</html>

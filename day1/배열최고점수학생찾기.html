@@ -34,6 +34,42 @@
         document.write(`평균 : ${roundScore}`);
 
         // 최고점수학생이름찾기 숙제 (풀어보셔용~~)
+
+        document.write("<br>");
+        document.write("최고점수 학생 <br>");
+        let highScore = 0;
+        let topStudent;
+        for(let i = 0; i < student.length; i++){
+            if(student[i].score > highScore){
+                highScore = student[i].score;
+                topStudent = student[i];
+            }
+        }
+        console.log(highScore);
+        console.log(topStudent);
+        document.write(`최고점수 학생 : ${topStudent.name} / 점수 : ${highScore}`);
+
+
+        document.write("<br>");
+        //평균 이상 학생 정보
+        let passedStudent = [];
+        // for(let i = 0; i < student.length; i++){
+        //     if(student[i].score >= roundScore){
+        //         passedStudent.push(student[i]);
+        //     }
+        // }
+        // console.log(passedStudent);
+        document.write("평균 이상 학생 <br>");
+        // for(let i = 0; i < passedStudent.length; i++){
+        //     document.write(`${passedStudent[i].name} : ${passedStudent[i].score}<br>`);
+        // }
+
+        for(let p of student){
+            if(p.score >= roundScore){
+                passedStudent.push(p);
+                document.write(`${p.name} : ${p.score}<br>`);
+            }
+        }
     </script>
 </body>
 </html>

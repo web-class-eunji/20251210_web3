@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타이머</title>
+</head>
+<body>
+    <script>
+        // isNaN(입력받은값) : 사용자가 입력한 값이 숫자가 아니라면 true를 반환함
+        // NaN : Not a Number
+
+        let userTime = Number(prompt("타이머 시간을 입력하삼 (초)"));
+        if(isNaN(userTime) || userTime <= 0){
+            document.write("올바를 시간을 입력하삼");
+        }else {
+            document.write("타이머 시작 : "+ userTime +"초 남음");
+
+            let timer = setInterval(()=>{
+                userTime--;
+                if(userTime > 0){
+                    document.write(`남은시간 : ${userTime} 초`);
+                }else {
+                    clearInterval(timer);
+                    document.write("타이머 종료!");
+                }
+            },1000)
+        }
+    </script>
+</body>
+</html>
