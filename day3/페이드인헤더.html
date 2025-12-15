@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이드인헤더</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 5000px;
+        }
+
+        header {
+            height: 80px;
+            background-color: blueviolet;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .lorem {
+            margin-top: 80px;
+            font-size: 24px;
+        }
+
+        header.hide {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <header id="header"></header>
+
+    <div class="lorem">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id veritatis, quo neque nam numquam doloribus, sequi impedit, placeat omnis eaque vero reiciendis aperiam minus saepe voluptate soluta magni ad ipsam?
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id veritatis, quo neque nam numquam doloribus, sequi impedit, placeat omnis eaque vero reiciendis aperiam minus saepe voluptate soluta magni ad ipsam?
+    </div>
+    <script>
+        const header = document.querySelector("#header");
+        console.log(header);
+
+        let posY = 0;
+        window.addEventListener("scroll",(e)=>{
+            if(posY < window.scrollY){
+                headerHide();
+            } else {
+                headerShow();
+            }
+
+            posY = window.scrollY;
+        })
+
+        function headerHide(){
+            header.classList.add("hide");
+        }
+        
+        function headerShow(){
+            header.classList.remove("hide");
+        }
+    </script>
+</body>
+</html>

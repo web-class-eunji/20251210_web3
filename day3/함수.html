@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수</title>
+</head>
+<body>
+    <button class="button">버튼</button>
+    <script>
+        // 함수 = 기능을 저장하는 하나의 공간
+
+        //  변수 = function(){
+        //      js코드
+        //  }
+
+        // function 함수명(){
+        //     js코드;
+        // }
+
+        let count = 0;
+        firstFunction();
+
+        
+        function firstFunction(){
+            count++;
+            document.write(`안녕하세요 ${count}<br>`);
+        }
+        firstFunction();
+
+        secondFunction();
+
+        let secondFunction = function(){
+            count++;
+            document.write(`안녕히계세요 ${count}`);
+        }
+
+        secondFunction();
+
+        const button = document.querySelector(".button");
+        button.addEventListener("click", function(){
+            
+        })
+    </script>
+</body>
+</html>
