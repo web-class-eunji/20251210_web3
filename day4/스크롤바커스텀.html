@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤바커스텀</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        .section {
+            height: 5000px;
+            /* width: 5000px; */
+        }
+
+        ::-webkit-scrollbar {
+            width: 24px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: cornflowerblue;
+            border-radius: 16px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgb(40, 69, 128);
+            border-radius: 16px;
+            transition: 0.3s;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgb(185, 208, 255);
+        }
+    </style>
+</head>
+<body>
+    <section class="section"></section>
+</body>
+</html>

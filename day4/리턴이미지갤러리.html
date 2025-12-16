@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리턴이미지갤러리</title>
+    <style>
+        button {
+            width: 250px;
+            height: 80px;
+            background: skyblue;
+            color: #fff;
+            border: none;
+            font-size: 50px;
+        }
+
+        figure,
+        img {
+            width: 500px;
+            height: 700px;
+            margin: 0 0 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <figure>
+            <img id="photo" src="./picture_1.jpg" alt="">
+        </figure>
+        <button onclick="gallery(0)">prev</button>
+        <button onclick="gallery(1)">next</button>
+    </div>
+    <script>
+        /*
+        html로 구조를 잡은 후
+        figure안에 첫번째 보일 img를 넣어줌 (이미지엔 아이디가 있음)
+        button 2개 만들기
+        이전 버튼을 누르면 onclick="함수이름(0)" 을 넣어준다.
+        다음 버튼을 누르면 onclick="함수이름(1)" 을 넣어준다.
+
+        script
+        현재 보여지는 img의 번호를 저장하는 변수를 만들것(1)
+        함수를 만드는데 매개변수를 받을것이다.
+        버튼에서 함수를 호출하여 받은 매개변수를 가지고 if문을 제어한다.
+        만약  3과 같다면 다음으로 넘어갈 수 없게
+        1과 같다면 이전으로 넘어갈 수 없게 만들기
+
+        이미지에 있는 id를 불러와서
+        이미지변수명.setAttribute("src","./동물" + img의 번호를 저장하는 변수 + ".jpg");
+        ./동물2.jpg
+
+        */
+       let imgNum = 1;
+       function gallery(num){
+            if(num){
+                //next를 눌렀을 때
+                if(imgNum == 3){
+                    return;
+                }else{
+                    imgNum++;
+                }
+            }else{
+                //prev를 눌렀을 때
+                if(imgNum == 1){
+                    return;
+                }else{
+                    imgNum--;
+                }
+            }
+            let photo = document.getElementById("photo");
+            photo.setAttribute("src","./picture_" + imgNum + ".jpg")
+       }
+    </script>
+</body>
+</html>
