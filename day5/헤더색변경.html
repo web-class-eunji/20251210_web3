@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>헤더색변경</title>
+    <style>
+        body {
+            height: 5000px;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            width: 100%;
+            padding: 0 16px;
+            position: fixed;
+            color: #fff;
+            background: cornflowerblue;
+            align-items: center;
+            box-sizing: border-box;
+            transition: 1s;
+        }
+
+        .header > ul {
+            display: flex;
+            list-style: none;
+        }
+
+        li {
+            padding: 0 8px;
+            transition: 0.3s;
+        }
+
+        .login_btn > button {
+            background: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .headedr_active {
+            background-color: darkblue;
+        }
+
+        .header_active_text {
+            color: cornflowerblue;
+        }
+
+        .login_btn > .header_active_button {
+            background: crimson;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <h1 class="color_change">LOGO</h1>
+        <ul id="menu">
+            <li class="color_change">메뉴1</li>
+            <li class="color_change">메뉴2</li>
+            <li class="color_change">메뉴3</li>
+            <li class="color_change">메뉴4</li>
+        </ul>
+        <div class="login_btn">
+            <button>로그인</button>
+            <button>회원가입</button>
+        </div>
+    </header>
+
+    <script>
+        // getBoundingClientRect().x : 현재 창기준 x좌표
+        // getBoundingClientRect().y : 현재 창기준 y좌표
+        // getBoundingClientRect().width : 엘리먼트 가로
+        // getBoundingClientRect().height : 엘리먼트 세로
+        // getBoundingClientRect().top : 현재 창기준 세로 시작점 부터 엘리먼트 윗변 까지의 거리
+        // getBoundingClientRect().left : 현재 창기준 가로 시작점 부터 엘리먼트 왼쪽변 까지의 거리
+        // getBoundingClientRect().right : 현재 창기준 가로 시작점 부터 엘리먼트 오른쪽변 까지의 거리
+        // getBoundingClientRect().bottom : 현재 창기준 세로 시작점 부터 엘리먼트 아래변 까지의 거리
+        const header = document.getElementById("header");
+        let headerHeight = header.getBoundingClientRect().height;
+        console.log(headerHeight);
+        const headerColorChange = document.querySelectorAll(".color_change");
+        console.log(headerColorChange);
+        const btns = document.querySelectorAll(".login_btn button");
+        console.log(btns);
+
+        window.addEventListener("scroll",()=>{
+            let scrollHeight = window.scrollY;
+            console.log(scrollHeight);
+
+            if(scrollHeight > headerHeight){
+                header.classList.add("headedr_active");
+                headerColorChange.forEach((elem)=>{
+                    elem.classList.add("header_active_text");
+                })
+                btns.forEach((btn)=>{
+                    btn.classList.add("header_active_button");
+                })
+            }else{
+                header.classList.remove("headedr_active");
+                headerColorChange.forEach((elem)=>{
+                    elem.classList.remove("header_active_text");
+                })
+                btns.forEach((btn)=>{
+                    btn.classList.remove("header_active_button");
+                })
+            }
+
+            headerHeight = window.scrollY;
+        })
+    </script>
+</body>
+</html>

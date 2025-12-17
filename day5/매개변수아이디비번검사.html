@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매개변수아이디비번검사</title>
+</head>
+<body>
+    <script>
+        /*
+        아이디 변수에 아이디를 미리 지정해놓음
+        패스워드 변수에 비밀번호를 미리 지정해놓음
+
+        login함수를 생성한 후 매개변수로 id pw를 입력받아와서 넣어주기
+        만약 미리 생성해둔 아이디 비밀번호와 같다면 로그인되었습니다~
+        id가 다르다면 아이디가 일치하지 않습니다. 
+        pw가 다르다면 pw가 다릅니다. 
+        유저가 입력한 id,pw를 로그인함수의 매개변수로 보내주기 
+        */
+
+        let id = "moeunji";
+        let pw = 1234;
+
+        function login(userId,userPw){
+            if(id == userId){
+                if(pw == userPw){
+                    document.write("로그인되었습니다!");
+                }else{
+                    document.write("비밀번호가 일치하지 않습니다!");
+                }
+            }else {
+                document.write("아이디를 확인해주세요");
+            }
+        }
+
+        let userId = prompt("아이디를 입력해주세요");
+        let userPw = prompt("비밀번호를 입력해주세요");
+
+        login(userId,userPw);
+    </script>
+</body>
+</html>
