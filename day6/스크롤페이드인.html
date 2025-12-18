@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스크롤페이드인</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 5000px;
+        }
+
+        .content_container {
+            overflow: hidden;
+        }
+
+        .content {
+            font-size: 100px;
+            text-align: center;
+            margin: 600px 0;
+        }
+
+        .to_top {
+            transform: translateY(-200px);
+        }
+        .to_bottom {
+            transform: translateY(200px);
+        }
+        .to_left {
+            transform: translateX(-200px);
+        }
+        .to_right {
+            transform: translateX(200px);
+        }
+        .to_rigth_bottom {
+            transform: translate(200px,200px);
+        }
+        .to_left_bottom {
+            transform: translate(-200px,200px);
+        }
+
+        .fade {
+            opacity: 0;
+            transition: 1.2s;
+        }
+
+        .in {
+            opacity: 1;
+            transform: none;
+        }
+
+        .box {
+            display: flex;
+        }
+
+        .delay:nth-child(2) {
+            transition-delay: 0.3s;
+        }
+
+        .delay:nth-child(3) {
+            transition-delay: 0.6s;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="content_container">
+        <h2 class="content fade to_top">안녕하세요 저는</h2>
+        <h2 class="content fade to_bottom">강아지를 좋아합니다.</h2>
+        <div class="box">
+            <p class="content fade to_bottom delay">가</p>
+            <p class="content fade to_bottom delay">나</p>
+            <p class="content fade to_bottom delay">다</p>
+        </div>
+        <h2 class="content fade to_left">가장 좋아하는 음식은</h2>
+        <h2 class="content fade to_right">엽기떡볶이 입니다.</h2>
+        <h2 class="content fade to_rigth_bottom">저는 지금 웹수업 중입니다.</h2>
+        <h2 class="content fade to_left_bottom">웹 수업은 html,css,javascript로 이루어져 있습니다.</h2>
+    </div>
+    <script>
+        const content = document.getElementsByClassName("content");
+        console.log(content);
+        window.addEventListener("scroll",()=>{
+            const winH = window.innerHeight;
+            for(let i = 0; i < content.length; i++){
+                const contentTop = content[i].getBoundingClientRect().top;
+                console.log(contentTop);
+                if(contentTop - winH < 0){
+                    content[i].classList.add("in");
+                }else {
+                    content[i].classList.remove("in");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
