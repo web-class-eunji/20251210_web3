@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>햄버거바</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .ham {
+            position: fixed;
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            border: none;
+            top:0;
+            right: 0;
+            z-index: 9999;
+            background: orange;
+            color: #fff;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .ham > span {
+            display: block;
+            width: 40px;
+            height: 5px;
+            border: 1px solid black;
+            background: black;
+            margin: 5px 0 20px 0;
+            transition: 0.3s;
+        }
+
+        .ham > .bar2 {
+            transition: none;
+        }
+
+        .ham > .bar3 {
+            margin-bottom: 0px;
+        }
+
+        .ham:hover > .bar1 {
+            transform: translateY(28px) rotate(40deg);
+        }
+
+        .ham:hover > .bar2 {
+            opacity: 0;
+        }
+
+        .ham:hover > .bar3 {
+            transform: translateY(-28px) rotate(-40deg);
+        }
+
+
+        .menu_bar {
+            top: 0;
+            right: 0;
+            position: fixed;
+            background: orange;
+            width: 300px;
+            height: 900%;
+            transform: translateX(500px);
+            transition: 1s;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        li {
+            padding: 16px;
+        }
+
+        .to_left {
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="ham" id="ham">
+        <span class="bar1"></span>
+        <span class="bar2"></span>
+        <span class="bar3"></span>
+    </div>
+    <div class="menu_bar" id="menu_bar">
+        <ul>
+            <li>메뉴1</li>
+            <li>메뉴2</li>
+            <li>메뉴3</li>
+        </ul>
+    </div>
+
+    <script>
+        const ham = document.getElementById("ham");
+
+        let i = 0;
+        ham.addEventListener("click", function(){
+            if( i == 0){
+                menu_bar.classList.add("to_left");
+                i++;
+                console.log(i);
+                }
+            else {
+                menu_bar.classList.remove("to_left");
+                i--;
+            }
+        });
+
+
+
+    </script>
+</body>
+</html>
