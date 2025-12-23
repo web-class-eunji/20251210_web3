@@ -107,11 +107,33 @@
         const sliderWidth = 1000; // 슬라이드 한 장의 너비
         let moveCheck = true; //이동중임을 체크하는 변수
 
+        /*
+        1. createElement : 새로운 HTMl 요소를 생성
+        2. remove / removeChild : HTMl에서 요소를 삭제할 때 사용
+            element.remove() : 요소 자체를 삭제
+            parent.removeChild(child) : 부모 요소에서 자식 요소를 삭제
+        3. appendChild : 부모요소에 자식요소를 맨 마지막에 추가
+            특징 : 추가할 요소가 이미 다른곳에 있다면 그 요소를 새 위치로 이동시킴
+        4. prepend : 부모요소에 자식요소를 맨 앞에 추가
+        5. insertBefore : 특정 요소 앞에 새 요소를 추가
+            parent.insertBefore(newNode, referenceNode)
+        6. replaceChild : 기존 자식 요소를 새 요소로 교체
+            parent.replaceChild(newNode, oldNode)
+        
+        */
+
         const first = slide.firstElementChild.cloneNode(true);
         console.log(first);
         const last = slide.lastElementChild.cloneNode(true);
         console.log(last);
         
+        slide.appendChild(first);
+        slide.insertBefore(last,slide.firstElementChild);
+        let sliderLength = slide.childElementCount;
+        console.log(sliderLength);
+
+        slide.style.width = sliderLength * sliderWidth + "px"; //ul길이조절
+
         //====================================================================================
         // 처음 브라우저 열었을 때 보이는 인덱스 설정
         
