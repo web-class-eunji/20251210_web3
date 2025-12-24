@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지점검색</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .map_section {
+            display: flex;
+            background: rgb(8, 100, 8);
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            color: #fff;
+        }
+
+        .left_map > p {
+            font-size: 24px;
+        }
+
+        .left_map > h1 {
+            font-size: 60px;
+            margin: 0;
+        }
+
+        .right_search > h2 {
+            font-size: 32px;
+            margin: 0;
+        }
+
+        .input_box {
+            width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid #fff;
+            padding: 8px 16px;
+            margin-top: 32px;
+            border-radius: 16px;
+        }
+
+        .input,
+        button {
+            background: none;
+            border: none;
+            color: #fff;
+            outline: none;
+            font-size: 20px;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button > img {
+            filter: invert(100%);
+        }
+
+        .map {
+            border-radius: 24px;
+        }
+        </style>
+</head>
+<body>
+    <section class="map_section">
+        <div class="left_map">
+            <p>스타벅스 지점찾기</p>
+            <h1>Starbucks Place</h1>
+            <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.747193671032!2d127.09837142378882!3d37.51388029753701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca52a0b5a7d5b%3A0xe1c5b622ca41f616!2z7Iqk7YOA67KF7IqkIOyeoOyLpOyLnOq3uOuniO2DgOybjOygkA!5e0!3m2!1sko!2skr!4v1766546311802!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="right_search">
+            <h2>지점찾기</h2>
+            <div class="input_box">
+                <input type="text" class="input" id="input_text" placeholder="지역을 입력하세요">
+                <button class="search_icon">
+                    <img src="./Group 287.png" alt="">
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const inputText = document.getElementById("input_text");
+        const btn = document.querySelector(".search_icon");
+       
+        btn.disabled = true;
+        btn.style.opacity = 0.3;
+
+        inputText.addEventListener("input",()=>{
+            if(inputText.value.trim() !== "" ){
+                // trim() : 입력한 문자의 공백을 제거 "      강남 " -> "강남"
+                btn.disabled = false;// input에 어떤 값이 들어왔다면 비활성화를 끈다.
+                btn.style.opacity = 1;
+            }else {
+                btn.disabled = true;
+                btn.style.opacity = 0.3;
+            }
+        });
+
+        btn.addEventListener("click",()=>{
+            input();
+        });
+
+        window.addEventListener("keyup",(e)=>{
+            if(e.key === "Enter"){
+                input();
+            }
+        });
+
+        function input(){
+            const query = encodeURIComponent("스타벅스 " + inputText.value.trim());
+            //encodeURIComponent : 주소창에 특수문자나 한글을 그대로 입력할 수 없기 때문에 웹 주소에 맞게 인코딩해줌
+            // 인코딩 : %EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4
+            window.open("https://www.google.co.kr/maps/search/"+ query +"/data=!3m1!4b1");
+        }
+    </script>
+</body>
+</html>

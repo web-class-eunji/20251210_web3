@@ -60,11 +60,12 @@
             height: 10px;
             background-color: rgb(255, 189, 202);
             border-radius: 50%;
+            transition: 0.3s;
         }
         
         .dot.active {
             background-color: crimson;
-            width: 25px;
+            width: 50px;
             border-radius: 8px;
         }
     </style>
@@ -136,9 +137,84 @@
 
         //====================================================================================
         // 처음 브라우저 열었을 때 보이는 인덱스 설정
-        
-        //
+        let index = 1;//현재 보고있는 화면의 번호 0 1 2 3 4 5 6
+        slide.style.transform = `translateX(-${index*sliderWidth}px)`;
 
+        //====================================================================================
+        buttons.children[0].addEventListener("click",prev);
+        buttons.children[2].addEventListener("click",next);
+        //====================================================================================
+        // 이동하는 함수
+        function moveSlide(time){
+            slide.style.transition = time + "ms";
+            slide.style.transform = `translateX(-${index*sliderWidth}px)`;
+            updateDot();
+        }
+   
+        //====================================================================================
+        // 이전 다음 함수
+        function prev(){
+            if(moveCheck){ // 만약 moveCheck가 true라면 실행한다.
+                moveCheck = false; // 슬라이드가 이동하는 중에 다시 if문이 실행되면 안됨! if문이 작동되지 않도록 잠시 막아줌
+                index--; // 이전을 눌렀으니 인덱스를 1감소시켜줌 
+                setTimeout(()=>{
+                    if(index===0){// 감소한 인덱스가 0과 같다면
+                        index = slide.childElementCount - 2; // 전체 인덱스에서 -2 한 값을 index에 넣어줌
+                        moveSlide(0); // 맨 왼쪽에 붙어있는 인덱스(5)에서 실제 5번 인덱스로 0초만에 이동함
+                    }
+                    moveCheck = true; // 다시 prev를 누를 수 있도록 true로 바꿔줌
+                },1000);// 1초안에 moveCheck가 true로 바뀜 
+                moveSlide(1000); // 왼쪽으로 이동시킴
+            }
+        }
+
+        function next(){
+            if(moveCheck){ // 만약 moveCheck가 true라면 실행한다.
+                moveCheck = false; // 슬라이드가 이동하는 중에 다시 if문이 실행되면 안됨! if문이 작동되지 않도록 잠시 막아줌
+                index++; // 다음을 눌렀으니 인덱스를 +1시켜줌 
+                setTimeout(()=>{
+                    if(index=== slide.childElementCount - 1){// 감소한 인덱스가 0과 같다면
+                        index = 1; // 전체 인덱스에서 -2 한 값을 index에 넣어줌
+                        moveSlide(0); // 맨 왼쪽에 붙어있는 인덱스(5)에서 실제 5번 인덱스로 0초만에 이동함
+                    }
+                    moveCheck = true; // 다시 prev를 누를 수 있도록 true로 바꿔줌
+                },1000);// 1초안에 moveCheck가 true로 바뀜 
+                moveSlide(1000); // 왼쪽으로 이동시킴
+            }
+        }
+
+        //====================================================================================
+        // dot만들기
+
+        for(let i = 0; i < sliderLength-2; i++){
+            const makeDot = document.createElement('div');
+            makeDot.classList.add("dot");
+            dotBox.appendChild(makeDot);
+            
+            makeDot.addEventListener("click",()=>{
+                index = i + 1;
+                moveSlide(1000);
+            });
+        }
+
+        dotBox.children[0].classList.add("active");
+
+        function updateDot(){
+            for(let i = 0; i < sliderLength-2; i++){
+                dotBox.children[i].classList.remove("active");
+                if(index===0){
+                    dotBox.children[sliderLength-3].classList.add("active");
+                }else if(index === sliderLength - 1){
+                    dotBox.children[0].classList.add("active");
+                }else{
+                    dotBox.children[index-1].classList.add("active");
+                }
+            }
+        }
+
+        setInterval(()=>{
+            next();
+        },3000);
     </script>
 </body>
 </html>
