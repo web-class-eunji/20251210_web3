@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타이핑인터랙션</title>
+    <style>
+        body {
+            background: rgb(255, 0, 115);
+        }
+
+        #typing {
+            font-size: 60px;
+            font-weight: bold;
+            color: #fff;
+            margin: 0 300px;
+            transform: translateY(350px);
+            border-right: 2px solid #fff;
+            width: max-content;
+            animation: borderAnimation 1s infinite;
+        }
+
+        @keyframes borderAnimation {
+            50% {
+                /* border: none; */
+                /* 배경색주기 */
+                border-right: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="typing">
+    </div>
+    <script>
+        const texts = [
+            "WELCOME TO MY PORTFOLIO",
+            "저의 포트폴리오에 오신것을 환영합니다람쥐",
+            "저는 컴퓨터를 팔고있어요",
+            "오늘은 12월 30일 입니다"
+        ]
+
+        let textIndex = 0;//현재 어떤 문장 타이핑 중인지 저장할 변수
+        let charIndex = 0;// 현재 문장 안에서 몇번째 글자까지 썼는지 확인할 변수
+
+        console.log(texts[textIndex][3]);
+
+        const typingElement = document.getElementById("typing");
+        console.log(texts[textIndex].length);
+        const typing = ()=>{
+            if(charIndex < texts[textIndex].length){
+                typingElement.textContent += texts[textIndex][charIndex];
+                charIndex++;
+                setTimeout(typing,150);
+            }else {
+                setTimeout(()=>{
+                    typingElement.textContent = "";
+                    charIndex = 0;
+                    textIndex = (textIndex+1) % texts.length;
+                    //texts.length : 4 : 0 ~ 3
+                    // 1 / 4 = 1
+                    // 2 / 4 = 2
+                    // 3 / 4 = 3
+                    // 4 / 4 = 0
+                    typing();
+                },1000);
+            }
+        }
+        typing();
+    </script>
+</body>
+</html>
