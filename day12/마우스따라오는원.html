@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마우스따라오는원</title>
+    <style>
+        /* .cursor {
+            width: 50px;
+            height: 50px;
+            background: lightblue;
+            border-radius: 50%;
+            transition: 0.1s;
+        } */
+    </style>
+</head>
+<body>
+    <div class="cursor">
+        <img src="./4124.png" alt="">
+    </div>
+    <script>
+        const cursor = document.querySelector(".cursor");
+        document.addEventListener("mousemove",(e)=>{
+            //pageX / pageY : mousemove 이벤트가 발생하면 발생한 위치의 좌표를 알려줌]
+            // console.log(`x : ${e.pageX}`);
+            // console.log(`Y : ${e.pageY}`);
+            cursor.style.transform = `translate(${e.pageX}px,${e.pageY}px)`;
+            // cursor.style.transform = 'translate(' + e.pageX + 'px,' + e.pageY + 'px' + ')';
+        })
+
+        document.addEventListener("mousedown",()=>{
+            cursor.style.transform += "scale(1.5)";
+        })
+
+        document.addEventListener("mouseup",()=>{
+            cursor.style.transform = cursor.style.transform.replace("scale(1.5)","");
+            // replace(제거(스케일1.5),새로넣을값(아무것도 없음))
+        });
+    </script>
+</body>
+</html>
