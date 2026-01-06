@@ -124,6 +124,62 @@
             width: 120px;
             background: rgb(240, 255, 23);
         }
+
+        .content:hover .inner > figure {
+            height: 250px;
+            transform: translateY(50px);
+            filter: saturate(200%);
+        } 
+
+        .content:hover .inner .txt p {
+            color: #fff;
+        }
+
+        .hidden_content {
+            width : 100%;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: -100%;
+            opacity: 0;
+            z-index: 2;
+            background: #333;
+            padding: 200px;
+            transition: 1s;
+        }
+
+        .hidden_content > figure {
+            width: 75%;
+            height: 100%;
+        }
+        .hidden_content > figure > video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hidden_content h2{
+            color: #fff;
+        }
+
+        .hidden_content p {
+            margin-bottom: 60px;
+            color: #727272;
+        }
+
+        .hidden_content span {
+            color: rgb(240, 255, 23);
+            cursor: pointer;
+        }
+
+        .txt > h2.change_title::after {
+            background: rgb(240, 255, 23); 
+        }
+
+        .hidden_content.on{
+            opacity: 1;
+            left: 0%;
+        }
     </style>
 </head>
 <body>
@@ -189,7 +245,7 @@
             </article>
         </section>
 
-        <!-- <section class="hidden_content">
+        <section class="hidden_content">
             <div class="txt">
                 <h2 class="change_title">01</h2>
                 <p class="change_text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
@@ -198,10 +254,49 @@
             <figure>
                 <video class="hidden_video" src="./vid4.mp4" muted loop></video>
             </figure>
-        </section> -->
+        </section>
     </main>
     <script>
-        
+        const items = document.querySelectorAll(".content");
+        const leftSlide = document.querySelector(".hidden_content");
+        const close = leftSlide.querySelector(".close_txt");
+
+        for(let i = 0; i < items.length; i++){
+            const el = items[i];
+            console.log(el);
+
+            el.addEventListener("mouseenter",function(e){
+                e.currentTarget.querySelector("video").play();
+                //mouseenter : el안에 마우스가 들어왔다고 감지되었을 때 이벤트가 발생한다.
+                //e.currentTarget : 이벤트가 감지된 타켓
+                // play() : 실행메서드
+            })
+            el.addEventListener("mouseleave",function(e){
+                e.currentTarget.querySelector("video").pause();
+                //mouseleave : el안에 마우스가 떠났다고 감지되었을 때 이벤트가 발생한다.
+                //e.currentTarget : 이벤트가 감지된 타켓
+                // pause() : 정지
+            })
+
+            el.addEventListener("click", function(e){
+                const title = e.currentTarget.querySelector("h2").innerText;
+                const txt = e.currentTarget.querySelector("p").innerText;
+                const videoSrc = e.currentTarget.querySelector("video").getAttribute("src");
+                console.log(title);
+
+                leftSlide.querySelector(".change_title").innerText = title;
+                leftSlide.querySelector(".change_text").innerText = txt;
+                leftSlide.querySelector(".hidden_video").setAttribute("src",videoSrc);
+
+                leftSlide.classList.add("on");
+                leftSlide.querySelector(".hidden_video").play();
+            });
+
+            close.addEventListener("click",function(){
+                leftSlide.classList.remove("on");
+                leftSlide.querySelector(".hidden_video").pause();
+            });
+        }
     </script>
 </body>
 </html>
