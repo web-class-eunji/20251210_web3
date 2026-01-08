@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시작텍스트인터랙션</title>
+    <style>
+        body {
+            background-color: black;
+            color: #fff;
+            height: 5000px;
+        }
+
+        .text_container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .text_line {
+            display: flex;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .word {
+            opacity: 0;
+            transform: translateY(100%);
+            animation: textUp 0.6s forwards;
+            /* forwards : 애니메이션이 끝나고 유지됨 */
+            margin: 0px 15px;
+        }
+
+        @keyframes textUp {
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="text_container" id="text_container">
+        <div class="text_line word" id="line1"></div>
+        <div class="text_line word" id="line2"></div>
+        <div class="text_line word" id="line3"></div>
+    </div>
+
+    <script>
+        const line1Word = ["Timeless","Spaces,"]; // 윗줄에 넣을 단어들
+        const line2Word = ["Perfected","by","Trust"]; // 밑줄에 넣을 단어들
+        const line3Word = ["Perfected","bysdfsd","Trustfdsf"]; // 밑줄에 넣을 단어들
+
+        function animateLine(lineId,words,delayOffset){ 
+            const line = document.getElementById(lineId);
+            words.forEach((word, index)=>{
+                const span = document.createElement('span');
+                span.className = 'word';
+                span.textContent = word;
+                span.style.animationDelay = `${(index + delayOffset) * 0.3}s`;
+
+                line.appendChild(span);
+            });
+        }
+
+        function playAnimation(){
+            animateLine('line1',line1Word,0);
+            animateLine('line2',line2Word,line1Word.length);
+            animateLine('line3',line3Word,line2Word.length);
+        }
+
+        const textContainer = document.getElementById('text_container');
+        function resetAnimation(){
+            document.getElementById('line1').innerHTML = '';
+            document.getElementById('line2').innerHTML = '';
+            document.getElementById('line3').innerHTML = '';
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry =>{
+                if(entry.isIntersecting){
+                    playAnimation();
+                }else {
+                    resetAnimation();
+                }
+            });
+        },{
+            threshold:0.5
+        });
+
+        observer.observe(textContainer);
+
+    </script>
+</body>
+</html>

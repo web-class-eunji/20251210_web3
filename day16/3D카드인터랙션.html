@@ -1,11 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3d카드</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 50px;
+            background-color: rgb(60, 60, 97);
+            perspective: 500px;
+        }
+
+        .card {
+            position: relative;
+            width: 300px;
+            height: 450px;
+            border-radius: 20px;
+            background-color: aqua;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0, 0.27, 1, 1);
+        }
+
+        .card_content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transform: translateZ(110px);
+            color: #fff;
+        }
+
+        .first {
+            background: url(./2142687_569197_3237.jpg);
+            background-size: cover;
+        }
+
+        .second {
+            background: url(./pngtree-planets-and-stars-in-space-picture-image_15988230.jpg);
+            background-size: cover;
+        }
+
+        .animal_img {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            transform: translateZ(60px);
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div class="card first">
+        <div class="card_content">
+            <h2>숲속의 무법자 다람G</h2>
+            <p>나는 이제 장풍을 쏠 줄 알아용</p>
+        </div>
+        <img class="animal_img" src="./다람쥐의장풍.png" alt="">
+    </div>
+    <div class="card second">
+        <div class="card_content">
+            <h2>님들 우주 가보심?</h2>
+            <p>나는 우주 가본 세계 최초 멍멍</p>
+        </div>
+        <img class="animal_img" src="./강아지이미지.png" alt="">
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll(".card");
+        console.log(cards);
+
+        cards.forEach(card=>{
+            card.addEventListener("mousemove",(e)=>{
+                // console.log(e);
+                const rect = card.getBoundingClientRect();
+                // top, x, y,left,width,height
+                // const 
+                // e.clientX : 브라우저 왼쪽을 기준으로 마우스의 X좌표 가져옴
+                // e.clientY : 브라우저 왼쪽을 기준으로 마우스의 Y좌표 가져옴
+                // rect.left : 카드의 왼쪽 시작점
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                // console.log(rect.left);
+                // 카드의 왼쪽 시작점 : 200
+                // 마우스의 X좌표 : 350
+                // 350 - 200 = 150
+
+                const centerX = rect.width/2;
+                const centerY = rect.height/2;
+
+                const rotateX = -(y-centerY)/15;
+                const rotateY = (x-centerX)/15;
+                //x : 카드 왼쪽 기준 마우스 위치
+                // centerX : 카드 X중앙
+                // 200 - 150 = 50 -> rotateY(3.3deg)
+
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;                
+                card.addEventListener("mouseleave",()=>{
+                    card.style.transform = `rotateX(0deg) rotateY(0deg)`;  
+                })
+
+            })
+        });
+    </script>
 </body>
+
 </html>
