@@ -185,7 +185,7 @@
         // 반응형함수
         function initFullPageScroll(){
             if(window.innerWidth > breakPoint){
-                window.addEventLister("wheel",handleScroll); // 오타
+                window.addEventListener("wheel",handleScroll); // 오타
             }else{
                 window.removeEventListener("wheel",handleScroll);
             }
